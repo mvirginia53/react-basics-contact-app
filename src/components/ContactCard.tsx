@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react';
+import { Link } from 'react-router-dom';
 import { Contact } from './types';
 import user from './user.png';
 
@@ -12,8 +13,10 @@ export const ContactCard: FunctionComponent<ContactCardProps> = ({ contact, dele
 		<div className='item'>
 			<img className='ui avatar image' src={user} alt='user' />
 			<div className='content'>
-				<div className='header'>{contact.name}</div>
-				<div>{contact.email}</div>
+				<Link to={`/contact/${contact.id}`} state={{ contact }}>
+					<div className='header'>{contact.name}</div>
+					<div>{contact.email}</div>
+				</Link>
 			</div>
 
 			<i

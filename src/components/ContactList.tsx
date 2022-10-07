@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ContactCard } from './ContactCard';
 import { Contact } from './types';
@@ -6,13 +6,16 @@ import { Contact } from './types';
 interface ContactListProps {
 	contacts: Contact[];
 	removeContactHandler: (id: string | undefined) => void;
+	serachQueryHandler: (value: string | undefined) => void;
 }
 
 export const ContactList: FunctionComponent<ContactListProps> = ({
 	contacts,
 	removeContactHandler,
+	serachQueryHandler,
 }) => {
-	const renderContactLis = contacts.map((contact) => {
+	const inputElem = useRef<HTMLInputElement>(null);
+	const renderContactList = contacts.map((contact) => {
 		return (
 			<ContactCard
 				contact={contact}
@@ -21,6 +24,11 @@ export const ContactList: FunctionComponent<ContactListProps> = ({
 			/>
 		);
 	});
+
+	const getQuerySearch = () => {
+		const value = inputElem.current?.value;
+		serachQueryHandler(inputElem.current?.value);
+	};
 	return (
 		<div className='ui celled list' style={{ marginTop: '60px' }}>
 			<h2>Contact List</h2>
@@ -31,8 +39,19 @@ export const ContactList: FunctionComponent<ContactListProps> = ({
 					Add contact
 				</button>
 			</Link>
-
-			{renderContactLis}
+			<div className='ui search' style={{ marginBottom: '16px' }}>
+				<div className='ui icon input'>
+					<input
+						ref={inputElem}
+						type='text'
+						placeholder='Search contact'
+						className='prompt'
+						onChange={getQuerySearch}
+					/>
+					<i className='search icon' />
+				</div>
+			</div>
+			{renderContactList.length > 0 ? renderContactList : 'No contacts available'}{' '}
 		</div>
 	);
 };

@@ -12,6 +12,8 @@ import { EditContact } from './EditContact';
 
 function App() {
 	const [contacts, setContacts] = useState<Contact[]>([]);
+	const [searchQuery, setSearchQuery] = useState('');
+	const [searchResults, setSearchResults] = useState<Contact[]>([]);
 
 	const retriveContacts = async () => {
 		const request = '/contacts';
@@ -53,6 +55,16 @@ function App() {
 		getContacts();
 	}, []);
 
+	const serachQueryHandler = (value: string | undefined) => {
+		if (value && value !== '') {
+			setSearchQuery(value);
+			const newContactList = contacts.filter((contact) => {
+				return Object.values(contact).join(' ').toLowerCase().includes(value.toLowerCase());
+			});
+			setSearchResults(newContactList);
+		} else setSearchResults(contacts);
+	};
+
 	return (
 		<div className='ui container'>
 			<Router>
@@ -64,7 +76,11 @@ function App() {
 					<Route
 						path='/'
 						element={
-							<ContactList contacts={contacts} removeContactHandler={removeContactHandler} />
+							<ContactList
+								contacts={searchQuery.length < 1 ? contacts : searchResults}
+								removeContactHandler={removeContactHandler}
+								serachQueryHandler={serachQueryHandler}
+							/>
 						}></Route>
 
 					<Route path='/contact/:id' element={<ContactDetail />}></Route>

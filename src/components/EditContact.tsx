@@ -1,7 +1,5 @@
 import React, { useState, FunctionComponent } from 'react';
-
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Contact } from './types';
 
 interface updateContactProps {
 	updateContactHandler: (contact: any) => void;

@@ -1,3 +1,9 @@
+Contact app build with React, Typescript, React hooks, JSON Server, axios
+
+![Alt text](./src/Captura.PNG 'Contact list')
+![Alt text](./src/Captura2.PNG 'Add contact')
+![Alt text](./src/Captura3.PNG 'Edit contact')
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

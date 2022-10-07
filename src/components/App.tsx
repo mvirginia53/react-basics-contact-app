@@ -7,6 +7,7 @@ import { ContactList } from './ContactList';
 import { Header } from './Header';
 import { Contact } from './types';
 import { ContactDetail } from './ContactDetail';
+import { DeleteContact } from './DeleteContact';
 
 function App() {
 	const LOCAL_STORAGE_KEY = 'contacts';
@@ -53,6 +54,9 @@ function App() {
 						}></Route>
 
 					<Route path='/contact/:id' element={<ContactDetail />}></Route>
+					<Route
+						path='/delete'
+						element={<DeleteContact removeContactHandler={removeContactHandler} />}></Route>
 				</Routes>
 			</Router>
 		</div>

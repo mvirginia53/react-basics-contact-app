@@ -12,11 +12,8 @@ export const ContactList: FunctionComponent<ContactListProps> = ({
 	contacts,
 	removeContactHandler,
 }) => {
-	const deleteContact = (id: string | undefined) => {
-		if (id) removeContactHandler(id);
-	};
 	const renderContactLis = contacts.map((contact) => {
-		return <ContactCard contact={contact} key={contact.id} deleteContact={deleteContact} />;
+		return <ContactCard contact={contact} key={contact.id} />;
 	});
 	return (
 		<div className='ui celled list' style={{ marginTop: '60px' }}>

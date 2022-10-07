@@ -5,12 +5,11 @@ import user from './user.png';
 
 interface ContactCardProps {
 	contact: Contact;
-	deleteContact: (id: string | undefined) => void;
 }
 
-export const ContactCard: FunctionComponent<ContactCardProps> = ({ contact, deleteContact }) => {
+export const ContactCard: FunctionComponent<ContactCardProps> = ({ contact }) => {
 	return (
-		<div className='item'>
+		<div className='item' style={{ padding: '16px 0' }}>
 			<img className='ui avatar image' src={user} alt='user' />
 			<div className='content'>
 				<Link to={`/contact/${contact.id}`} state={{ contact }}>
@@ -19,16 +18,17 @@ export const ContactCard: FunctionComponent<ContactCardProps> = ({ contact, dele
 				</Link>
 			</div>
 
-			<i
-				className='trash alternate outline icon'
-				style={{
-					color: 'red',
-					display: 'block',
-					float: 'right',
-					fontSize: '16px',
-					marginTop: '7px',
-				}}
-				onClick={() => deleteContact(contact.id)}></i>
+			<Link to={`/delete`} state={{ id: contact.id }}>
+				<i
+					className='trash alternate outline icon'
+					style={{
+						color: 'red',
+						display: 'block',
+						float: 'right',
+						fontSize: '16px',
+						marginTop: '7px',
+					}}></i>
+			</Link>
 		</div>
 	);
 };
